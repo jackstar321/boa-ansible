@@ -1,10 +1,29 @@
-print("welcome to python")
 
-a=10
-a="hello"
-a=13.45
+class Student:
+    def __init__(self, rollno, name, subject, totalmarks):
+        self.rollno = rollno
+        self.name = name
+        self.subject = subject
+        self.totalmarks = totalmarks
 
-print(a)
+    def displayData(self):
+        print(f"The Name and subject of student is {
+              self.name} , {self.subject}")
 
-if 10 > 5:
-    print('this is true')
+    def __str__(self):
+        return f"{self.rollno}, {self.name},{self.subject}, {self.totalmarks}"
+
+# create the object
+
+
+sayna = Student("199", "sanya", "Maths", "99")
+mahesh = Student("109", "mahesh", "Phy", "98")
+
+# display the object into human readable string we use __str__
+
+
+# sayna.displayData()
+# mahesh.displayData()
+
+print(mahesh)
+print(sayna)
