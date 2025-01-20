@@ -1,0 +1,10 @@
+print("welcome to python")
+
+a=10
+a="hello"
+a=13.45
+
+print(a)
+
+if 10 > 5:
+    print('this is true')
