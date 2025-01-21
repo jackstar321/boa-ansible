@@ -1,72 +1,14 @@
 
-from fastapi import FastAPI,HTTPException,status
-from fastapi.params import Body
+from fastapi import FastAPI
+from . routers import post,user
 
-from random import randrange
-from . import schema
 
 app = FastAPI()
-# its model with bare min value expected
-my_post = [
-    {'title': 'user app', 'content': 'new content',
-        'published': True, 'id': 101, 'rating': 9}
-]
-def findById(id):
-    for p in my_post:
-        if p['id']== id:
-            return p
 
-def findById2(id):
-    for i, p in enumerate(my_post):
-        if p['id']== id:
-            print(i)
-            return i
+app.include_router(post.router)
+app.include_router(user.router)
 
-
-
-# dummy data
-
-# load all the records
-@app.get("/loaddata")
-def loaddata():
-    return {"message": my_post}
-
-# insert new records
-@app.post("/addpost",status_code=status.HTTP_201_CREATED)
-def registerPost(payload: schema.Base):
-    post_dict = payload.dict()
-    post_dict['id'] = randrange(0, 10000)
-    my_post.append(post_dict)
-    return {"data": my_post}
-
-@app.get("/loaduser/{id}")
-def loadUserById(id:int):
-    data=findById(id)
-    return {"User data": data}
-
-@app.delete("/deletuser/{id}")
-def deleteUserById(id:int):
-    data=findById2(id)
-    if data == None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="OOPS, user not found")
-    print('error')
-    my_post.pop(data)
-    return {"User data": data}
-
-@app.put("/updateuser/{id}")
-def updateUserById(id:int,post:schema.Base):
-    data=findById2(id)
-    if data == None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="OOPS, user not found")
-    postdata=post.model_dump()
-    postdata['id']=id
-    my_post[data]=postdata
-    
-    return {"User data": postdata}
-
-
-
---------------------
+---------------------
 
 
 from typing import Optional
@@ -77,3 +19,93 @@ class Base(BaseModel):
     content: str
     published: bool = True
     rating: Optional[int] = None
+
+-------------
+
+from fastapi import FastAPI, HTTPException, status, APIRouter
+from fastapi.params import Body
+
+from random import randrange
+from .. import schema
+
+
+router = APIRouter(tags=["USER APPLICATION"])
+
+my_post = [
+    {'title': 'user app', 'content': 'new content',
+        'published': True, 'id': 101, 'rating': 9}
+]
+
+
+def findById(id):
+    for p in my_post:
+        if p['id'] == id:
+            return p
+
+
+def findById2(id):
+    for i, p in enumerate(my_post):
+        if p['id'] == id:
+            print(i)
+            return i
+
+
+@router.get("/loaddata")
+def loaddata():
+    return {"message": my_post}
+
+# insert new records
+
+
+@router.post("/addpost", status_code=status.HTTP_201_CREATED)
+def registerPost(payload: schema.Base):
+    post_dict = payload.dict()
+    post_dict['id'] = randrange(0, 10000)
+    my_post.append(post_dict)
+    return {"data": my_post}
+
+
+@router.get("/loaduser/{id}")
+def loadUserById(id: int):
+    data = findById(id)
+    return {"User data": data}
+
+
+@router.delete("/deletuser/{id}")
+def deleteUserById(id: int):
+    data = findById2(id)
+    if data == None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="OOPS, user not found")
+    print('error')
+    my_post.pop(data)
+    return {"User data": data}
+
+
+@router.put("/updateuser/{id}")
+def updateUserById(id: int, post: schema.Base):
+    data = findById2(id)
+    if data == None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="OOPS, user not found")
+    postdata = post.model_dump()
+    postdata['id'] = id
+    my_post[data] = postdata
+
+    return {"User data": postdata}
+
+
+
+-----------
+from fastapi import FastAPI, HTTPException, status, APIRouter
+from fastapi.params import Body
+
+from random import randrange
+ 
+
+router = APIRouter(tags=["PROJECT APPLICATION"])
+
+@router.get("/loaddata")
+def loaddummy():
+    return {"message": "Welcome"}
+
