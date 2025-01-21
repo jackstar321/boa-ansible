@@ -1,6 +1,7 @@
 
 
 from fastapi import FastAPI
+from fastapi.params import Body
 
 app=FastAPI()
 
@@ -15,4 +16,10 @@ def welcome():
 @app.get("/login")
 def login():
     return{"message":"welcome to Login "}
+
+@app.post("/addpost")
+def registerPost(payload: dict=Body(...)):
+    print(payload)
+    return {"data":payload}
+
 
