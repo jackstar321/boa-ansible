@@ -1,9 +1,16 @@
 
-
 from fastapi import FastAPI
 from fastapi.params import Body
+from typing import Optional
+from pydantic import BaseModel
 
 app=FastAPI()
+# its model with bare min value expected 
+class Base(BaseModel):
+    title:str
+    content:str
+    published:bool= True
+    rating: Optional[int]=None
 
 my_post=[
     {'title':'user app', 'content':'new content','id':101}
@@ -18,7 +25,7 @@ def login():
     return{"message":"welcome to Login "}
 
 @app.post("/addpost")
-def registerPost(payload: dict=Body(...)):
+def registerPost(payload:Base):
     print(payload)
     return {"data":payload}
 
