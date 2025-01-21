@@ -4,7 +4,15 @@ from fastapi import FastAPI
 
 app=FastAPI()
 
+my_post=[
+    {'title':'user app', 'content':'new content','id':101}
+    ]
+
 @app.get("/welcome")
 def welcome():
-    return{"message":"welcome to FAST "}
+    return{"message":my_post}
+
+@app.get("/login")
+def login():
+    return{"message":"welcome to Login "}
 
