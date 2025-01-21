@@ -1,5 +1,5 @@
 
-from fastapi import FastAPI
+from fastapi import FastAPI,HTTPException,status
 from fastapi.params import Body
 from typing import Optional
 from pydantic import BaseModel
@@ -15,6 +15,11 @@ def findById(id):
     for p in my_post:
         if p['id']== id:
             return p
+
+def findById2(id):
+    for i, p in enumerate(my_post):
+        if p['id']== id:
+            return i
 
 class Base(BaseModel):
     title: str
@@ -41,4 +46,15 @@ def registerPost(payload: Base):
 def loadUserById(id:int):
     data=findById(id)
     return {"User data": data}
+
+@app.delete("/deletuser/{id}")
+def deleteUserById(id:int):
+    data=findById2(id)
+    if data == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="OOPS, user not found")
+    print('error')
+    my_post.pop(data)
+    return {"User data": data}
+
+
 
