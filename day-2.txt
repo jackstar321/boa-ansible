@@ -35,7 +35,7 @@ def loaddata():
     return {"message": my_post}
 
 # insert new records
-@app.post("/addpost")
+@app.post("/addpost",status_code=status.HTTP_201_CREATED)
 def registerPost(payload: Base):
     post_dict = payload.dict()
     post_dict['id'] = randrange(0, 10000)
@@ -55,6 +55,17 @@ def deleteUserById(id:int):
     print('error')
     my_post.pop(data)
     return {"User data": data}
+
+@app.put("/updateuser/{id}")
+def updateUserById(id:int,post:Base):
+    data=findById2(id)
+    if data == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="OOPS, user not found")
+    postdata=post.model_dump()
+    postdata['id']=id
+    my_post[data]=postdata
+    
+    return {"User data": postdata}
 
 
 
