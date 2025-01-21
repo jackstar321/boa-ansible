@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.params import Body
 from typing import Optional
 from pydantic import BaseModel
+from random import randrange
 
 app=FastAPI()
 # its model with bare min value expected 
@@ -13,7 +14,7 @@ class Base(BaseModel):
     rating: Optional[int]=None
 
 my_post=[
-    {'title':'user app', 'content':'new content','id':101}
+    {'title':'user app', 'content':'new content','published':True,'id':101,'rating':9}
     ]
 
 @app.get("/welcome")
@@ -26,7 +27,9 @@ def login():
 
 @app.post("/addpost")
 def registerPost(payload:Base):
-    print(payload)
-    return {"data":payload}
+    post_dict=payload.dict()
+    post_dict['id']=randrange(0,10000)
+    my_post.append(post_dict)
+    return {"data":my_post}
 
 
