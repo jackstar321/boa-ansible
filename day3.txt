@@ -1,4 +1,4 @@
-# resources with input given by users
+# resources with input given by users   resource-create-ec2.tf
 
 provider "aws" {
     region = "us-west-2"
@@ -13,7 +13,7 @@ resource "aws_instance" "example" {
 
 
 
-# for decalaring var for resources
+# for decalaring var for resources    variables.tf
 variable "ami_value" {
   description = "value for ami"
   
@@ -24,6 +24,6 @@ variable "instance_type_value" {
 }
 ------------
 
-#input given by user 
+#input given by user  terraform.tfvars
 ami_value="ami-00c257e12d6828491"
 instance_type_value="t2.micro"
