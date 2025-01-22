@@ -1,24 +1,9 @@
-uname: welcome
-email: admin@mail.com
-#List
-projects:
-  - IT
-  - BANKING
-  - Finance
-# Dict
-person:
-  name: John
-  age: 40
-  city: NY
-
-# list of dict
-family:
-  parents:
-    - name: John
-      age: 40
-      city: NY
-  children:
-    - name: Jimmy
-      age: 11
-    - name: Jimmy
-      age: 11
+provider "aws" {
+    region = "us-west-2"
+  
+}
+resource "aws_instance" "example" {
+    ami = "ami-00c257e12d6828491"
+    instance_type = "t2.micro"
+  
+}
