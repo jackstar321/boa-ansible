@@ -1,49 +1,29 @@
-Multiple Region Implementation in Terraform
+# resources with input given by users
 
 provider "aws" {
-  alias = "us-east-1"
-  region = "us-east-1"
-}
-
-provider "aws" {
-  alias = "us-west-2"
-  region = "us-west-2"
-}
-
+    region = "us-west-2"
+  }
 resource "aws_instance" "example" {
-  ami = "ami-0123456789abcdef0"
-  instance_type = "t2.micro"
-  provider = "aws.us-east-1"
+    ami = var.ami_value
+    instance_type = var.instance_type_value
+  
 }
 
-resource "aws_instance" "example2" {
-  ami = "ami-0123456789abcdef0"
-  instance_type = "t2.micro"
-  provider = "aws.us-west-2"
+-------
+
+
+
+# for decalaring var for resources
+variable "ami_value" {
+  description = "value for ami"
+  
 }
------
-
-Multiple Providers
-
-
-provider "aws" {
-  region = "us-east-1"
+variable "instance_type_value" {
+  description = "value for instance type"
+  
 }
+------------
 
-provider "azurerm" {
-  subscription_id = "your-azure-subscription-id"
-  client_id = "your-azure-client-id"
-  client_secret = "your-azure-client-secret"
-  tenant_id = "your-azure-tenant-id"
-}
-
-resource "aws_instance" "example" {
-  ami = "ami-0123456789abcdef0"
-  instance_type = "t2.micro"
-}
-
-resource "azurerm_virtual_machine" "example" {
-  name = "example-vm"
-  location = "eastus"
-  size = "Standard_A1"
-}  
+#input given by user 
+ami_value="ami-00c257e12d6828491"
+instance_type_value="t2.micro"
