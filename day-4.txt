@@ -1,7 +1,7 @@
-     sudo ssh-keygen
-
-   34  sudo ssh-copy-id -f "-o identityFile amar-boa-key.pem" ubuntu@34.215.243.214
-
-   36  sudo ssh ubuntu@34.215.243.214
-   37  sudo ssh-copy-id -f "-o identityFile amar-boa-key.pem" ubuntu@54.190.162.124
-   38  sudo ssh ubuntu@54.190.162.124
+- hosts: web
+  become: true
+  tasks:
+    - name: Create Directory on web instance
+      file:
+        path: ./basic-http-server
+        state: directory
