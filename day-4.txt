@@ -1,21 +1,30 @@
-    - name: install apache server
-      become: true
-      apt: name=apache2 update_cache=yes state=latest
-    - name: Copy the new index and replace
-      ansible.builtin.copy:
-        src: files/index.html
-        dest: /var/www/html
-        owner: root
-        group: root
-        mode: '0644'
-                 
-
-
-
-
 ---
-- name: Example Ansible playbook
-  hosts: all
-  remote_user: ubuntu
-  roles:
-    - boansible
+- name: Update apt cache and install Nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: index.html copy
+  template: src=index.html dest=/usr/share/nginx/html/index.html
+
+## Update the content on the website
+- name: updated.html copy
+  template: src=updated.html dest=/usr/share/nginx/html/index.html
+  notify:
+    - Restart Nginx
+
+
+
+-------
+
+<html>
+<body>
+
+<h1>Ansible Demo</h1>
+
+</body>
+</html>
+
+
+
