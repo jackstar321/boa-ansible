@@ -11,3 +11,13 @@
         owner: root
         group: root
         mode: '0644'
+
+
+
+
+---
+- name: Example Ansible playbook
+  hosts: all
+  remote_user: ubuntu
+  roles:
+    - boansible
