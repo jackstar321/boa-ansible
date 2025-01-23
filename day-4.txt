@@ -5,3 +5,66 @@
       file:
         path: ./basic-http-server
         state: directory
+
+
+
+-------------------------
+
+ubuntu@ip-172-31-16-103:~$ history
+    1  ls
+    2  clear
+    3  python3 --version
+    4  pip install ansible
+    5  sudo apt install python3-pip
+    6  pip install ansible
+    7  python3 -m pip install --user ansible
+    8  sudo apt-get update
+    9  pip install ansible
+   10  sudo apt install python3-pip
+   11  pip install ansible
+   12  sudo apt-get install ansible
+   13  ansible --version
+   14  ssh -i "amar-boa-key.pem" ubuntu@ec2-34-215-243-214.us-west-2.compute.amazonaws.com
+   15  clear
+   16  sudo vi amar-boa-key.pem
+   17  ls
+   18  chmod 400 "amar-boa-key.pem"
+   19  ssh -i "amar-boa-key.pem" ubuntu@ec2-34-215-243-214.us-west-2.compute.amazonaws.com
+   20  ssh -i "amar-boa-key.pem" ubuntu@ec2-54-190-162-124.us-west-2.compute.amazonaws.com
+   21  ssh ubuntu@54.190.162.124
+   22  sudo ssh ubuntu@54.190.162.124
+   23  ssh -i "amar-boa-key.pem" ubuntu@ec2-54-190-162-124.us-west-2.compute.amazonaws.com
+   24  clear
+   25  sudo ssh -i "amar-boa-key.pem" ubuntu@ec2-34-215-243-214.us-west-2.compute.amazonaws.com
+   26  sudo chmod 400 "amar-boa-key.pem"
+   27  sudo ssh -i "amar-boa-key.pem" ubuntu@ec2-34-215-243-214.us-west-2.compute.amazonaws.com
+   28  sudo ssh -i "amar-boa-key.pem" ubuntu@ec2-54-190-162-124.us-west-2.compute.amazonaws.com
+   29  cls
+   30  clear
+   31  ls
+   32  sudo ssh-keygen
+   33  sudo ssh-copy-id -f identityFile amar-boa-key.pem ubuntu@34.215.243.214
+   34  sudo ssh-copy-id -f "-o identityFile amar-boa-key.pem" ubuntu@34.215.243.214
+   35  ssh ubuntu@34.215.243.214
+   36  sudo ssh ubuntu@34.215.243.214
+   37  sudo ssh-copy-id -f "-o identityFile amar-boa-key.pem" ubuntu@54.190.162.124
+   38  sudo ssh ubuntu@54.190.162.124
+   39  history
+   40  sudo vi inventory.ini
+   41  cat inventory.ini 
+   42* 
+   43  clear
+   44  sudo vi inventory.ini
+   45  cat inventory.ini 
+   46  sudo vi inventory.ini
+   47  sudo ansible -i inventory.ini -m ping all
+   48  sudo vi inventory.ini
+   49  sudo ansible -i inventory.ini -m ping web
+   50  sudo ansible -i inventory.ini -m ping db
+   51  sudo ansible -i inventory.ini -m ping all
+   52  sudo vi inventory.ini
+   53  history
+   54  sudo vi playbook1.yml
+   55  ls
+   56  sudo ansible-playbook -i inventory.ini playbook1.yml 
+   57  history
