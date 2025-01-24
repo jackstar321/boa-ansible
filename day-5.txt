@@ -1,0 +1,46 @@
+- name: Example Ansible playbook
+  hosts: all
+  become: true
+  remote_user: ubuntu
+  roles:
+    - vardemo
+
+  vars:
+  #string
+    main_playbook_variable: 'demovar'
+  #boolean
+    is_enabled: false
+  #List
+    users:
+      - user1
+      - user2
+      - user3
+  #dict type
+    fruit_prices:
+      apple: 40
+      orange: 50
+  
+  vars_files:
+    - my-vars.yml
+
+  tasks:
+    - name: load the var from the same file
+      debug:
+        var: main_playbook_variable
+    - name: boolean value
+      debug:
+        msg: "value is true"
+      when: is_enabled
+    - name: list of users
+      debug:
+        var: users[1]
+    - name: data from external
+      debug:
+        var: vars_from_my_vars_yml
+
+
+--------------------
+
+
+vars_from_my_vars_yml: 'this is the value comes from the file'
+second_var: 'demo var from extername'
