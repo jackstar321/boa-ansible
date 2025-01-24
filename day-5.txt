@@ -1,1 +1,22 @@
-https://github.com/SkillsMetrix/ansible-app.git
+- name: Install lighthttpd WebServer
+  become: true
+  apt:
+    name: lighttpd
+    state: latest
+    update_cache: yes
+
+- name: Generate configuration file
+  template:
+    src: myconfig.j2
+    dest: /etc/lighttpd/lighttpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  vars:
+    server_port: 9090
+
+- name: Start lighhtpd Service
+  become: true
+  service:
+    name: lighttpd
+    state: started
