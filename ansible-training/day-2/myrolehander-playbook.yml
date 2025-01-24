@@ -1,0 +1,13 @@
+- name: Example Ansible playbook
+  hosts: db
+  become: true
+  remote_user: ubuntu
+  roles:
+    - nginxdemo
+
+  handlers:
+   - name: Restart nginx
+     service:
+       name: nginx
+       state: restarted
+     

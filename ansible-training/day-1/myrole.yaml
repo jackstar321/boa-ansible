@@ -1,0 +1,6 @@
+- name: Example Ansible playbook
+  hosts: db
+  become: true
+  remote_user: ubuntu
+  roles:
+    - nginxdemo
